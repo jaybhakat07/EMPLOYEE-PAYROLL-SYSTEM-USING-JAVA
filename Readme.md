@@ -1,17 +1,84 @@
-Welcome to the Employee Payroll System project in Java! This repository contains a comprehensive example of building a terminal-based Employee Payroll System using Object-Oriented Programming (OOP) principles. Through this project, you'll learn how to design and implement abstract classes, concrete subclasses, and explore inheritance, encapsulation, abstraction, and polymorphism in Java.
+# 🏢 Employee Payroll System — Java + JDBC + MySQL
 
-🔍 Project Highlights:
+A terminal-based Employee Payroll System built with **Java**, **JDBC**, and **MySQL**. Demonstrates core OOP principles and DBMS concepts including database normalization (1NF, 2NF, 3NF).
 
-Abstract Employee class serving as the foundation for different employee types.
-Concrete subclasses FullTimeEmployee and PartTimeEmployee with salary calculation.
-A user-friendly terminal interface for easy interaction and data management.
-Demonstrates core OOP concepts with practical coding examples.
-Complete source code and step-by-step guide for better understanding.
-🚀 Ready to dive in and enhance your Java skills? Whether you're a beginner eager to learn or an experienced developer brushing up on your OOP knowledge, this project is designed to provide valuable insights and hands-on experience. Clone this repository, explore the code, and take your Java programming skills to the next level!
+---
 
-📁 Repository Contents:
+## 🔍 Features
 
-Source code for the Employee Payroll System project.
-README with project overview, setup instructions, and usage details.
-🌟 Join the learning journey, contribute, and share your thoughts. Let's master OOP concepts and Java programming together!
+- ✅ **JDBC Integration** — connects Java to a real MySQL database
+- ✅ **Normalized Database** — tables designed in 3NF (Third Normal Form)
+- ✅ **OOP Principles** — Abstraction, Encapsulation, Inheritance, Polymorphism
+- ✅ **CRUD Operations** — Add, View, Search, and Remove employees
+- ✅ **Interactive Menu** — easy terminal interface
 
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── Main.java                 ← Entry point (interactive menu)
+├── Employee.java             ← Abstract base class
+├── FullTimeEmployee.java     ← Full-time employee (fixed monthly salary)
+├── PartTimeEmployee.java     ← Part-time employee (hours × rate)
+├── PayrollSystem.java        ← All JDBC/SQL operations
+└── DatabaseConnection.java   ← Singleton DB connection manager
+
+database/
+└── setup.sql                 ← Run this first! Creates DB + sample data
+
+lib/
+└── mysql-connector-j.jar     ← Download separately (see Setup below)
+```
+
+---
+
+## 🗄️ Database Design (Normalization)
+
+| Table | Purpose | Normal Form |
+|---|---|---|
+| `Department` | Stores department info | 3NF |
+| `Employee` | Employee identity + type + FK to dept | 3NF |
+| `FullTimeSalary` | Monthly salary for full-time employees | 3NF |
+| `PartTimeSalary` | Hours & hourly rate for part-time employees | 3NF |
+
+---
+
+## 🚀 Setup & Run
+
+### Step 1 — Prerequisites
+- Java JDK 8+
+- MySQL Server running locally
+- Download MySQL JDBC Driver JAR:
+  👉 https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.3.0/mysql-connector-j-8.3.0.jar
+  → Place it in the `lib/` folder
+
+### Step 2 — Create the Database
+Open **MySQL Workbench**, run `database/setup.sql`
+
+### Step 3 — Update Your Password
+In `src/DatabaseConnection.java`, set your MySQL password:
+```java
+private static final String DB_PASSWORD = "your_password_here";
+```
+
+### Step 4 — Compile & Run
+```bash
+# Compile
+javac -cp "lib/mysql-connector-j-8.3.0.jar" -d bin src/*.java
+
+# Run
+java -cp "bin;lib/mysql-connector-j-8.3.0.jar" Main
+```
+
+---
+
+## 🌟 OOP Concepts Demonstrated
+
+| Concept | Where Used |
+|---|---|
+| **Abstraction** | `Employee` abstract class with `calculateSalary()` |
+| **Inheritance** | `FullTimeEmployee` and `PartTimeEmployee` extend `Employee` |
+| **Polymorphism** | Overloaded `addEmployee()` method |
+| **Encapsulation** | Private fields with public getters |
